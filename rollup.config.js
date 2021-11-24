@@ -6,30 +6,40 @@ import postcss from "rollup-plugin-postcss";
 import pkg from "./package.json";
 import json from "@rollup/plugin-json";
 
-export default {
-  input: pkg.source,
-  output: [
-    { file: pkg.main, format: "cjs" },
-    { file: pkg.module, format: "esm" },
-  ],
-  plugins: [
-    json(),
-    external(),
-    babel({
-      exclude: "node_modules/**",
-    }),
-    del({ targets: ["dist/*"] }),
-    postcss({
-      config: {
-        path: "./postcss.config.js",
-      },
-      extensions: [".css"],
-      minimize: true,
-      inject: {
-        insertAt: "top",
-      },
-    }),
-    uglify(),
-  ],
-  external: Object.keys(pkg.peerDependencies || {}),
-};
+export default [
+  {
+    input: pkg.source,
+    output: [
+      { file: pkg.main, format: "cjs" },
+      { file: pkg.module, format: "esm" },
+    ],
+    plugins: [
+      json(),
+      external(),
+      babel({
+        exclude: "node_modules/**",
+      }),
+      del({ targets: ["dist/*"] }),
+      postcss({
+        config: {
+          path: "./postcss.config.js",
+        },
+        extensions: [".css"],
+        minimize: true,
+        inject: {
+          insertAt: "top",
+        },
+      }),
+      uglify(),
+    ],
+    external: Object.keys(pkg.peerDependencies || {}),
+  },
+  {
+    input: "./tailwind-bootstrap3.js",
+    output: [{ file: "presets/tailwind-bootstrap3.js", format: "cjs" }],
+  },
+  {
+    input: "./tailwind-bootstrap5.js",
+    output: [{ file: "presets/tailwind-bootstrap5.js", format: "cjs" }],
+  },
+];
