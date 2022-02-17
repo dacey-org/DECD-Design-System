@@ -1,12 +1,12 @@
 {
-  "name": "@dts-stn/decd-design-system",
-  "version": "1.6.0",
+  "name": "@daceytom2/decd-design-system",
+  "version": "1.0.0",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "source": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DTS-STN/DECD-Design-System"
+    "url": "git+https://github.com/DaceyTom2/DECD-Design-System"
   },
   
   "files": [
